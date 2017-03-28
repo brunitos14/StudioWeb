@@ -24,7 +24,7 @@ public class ConvidadoController {
 //	@Autowired
 //	private ConvidadoRepository repository;
 
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String index(){
 
 		String json = getEmployees();
