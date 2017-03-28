@@ -23,9 +23,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public UserDetailsService userDetailsService(){
 		return new UserService();
-		
+
 	}
-	
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth){
 		try {
@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			throw new SecurityException(e);
 		}
 	}
-	
+
 //	@Override
 //	protected void configure(AuthenticationManagerBuilder auth)
 //			throws Exception {
@@ -65,20 +65,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 //			.logoutSuccessUrl("/").and().exceptionHandling()
 //			.accessDeniedPage("/access-denied");
-		
+
 		http.
 		authorizeRequests()
 		.antMatchers("/admin/**").hasAuthority("ADMIN_GROUP").anyRequest();
-		
+
 		http.csrf().disable().authorizeRequests().anyRequest().authenticated().and()
-		.formLogin().loginPage("/login").defaultSuccessUrl("/index")
+		.formLogin().loginPage("/login").defaultSuccessUrl("/")
 		.failureUrl("/login?error")
 		.permitAll();
-		
-		
-		
-		
-		
+
+
+
+
+
 	}
 
 	@Override
@@ -87,11 +87,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	       .ignoring()
 	       .antMatchers("/css/**", "/font-awesome/**", "/fonts/**", "/js/**", "/images/**");
 	}
-	
+
 //	@Bean
 //	public BCryptPasswordEncoder passwordEncoder() {
 //		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //		return bCryptPasswordEncoder;
 //	}
-	
+
 }
