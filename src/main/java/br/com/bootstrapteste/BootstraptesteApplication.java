@@ -14,9 +14,4 @@ public class BootstraptesteApplication {
 		SpringApplication.run(BootstraptesteApplication.class, args);
 	}
 
-	@Bean
-	public WebSecurityConfigurerAdapter webSecurityConfigurerAdapter(){
-		return new WebSecurityConfig();
-	}
-
 }
