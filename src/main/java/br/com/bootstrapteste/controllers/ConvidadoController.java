@@ -27,23 +27,23 @@ public class ConvidadoController {
 	@RequestMapping("/")
 	public String index(){
 
-		String json = getEmployees();
-
-		Gson gson = new Gson();
+//		String json = getEmployees();
+//
+//		Gson gson = new Gson();
 
 //		TutorialVO staff = gson.fromJson(json, TutorialVO.class);
 
-		List<TutorialVO> list = gson.fromJson(json, new TypeToken<List<TutorialVO>>(){}.getType());
-		for (TutorialVO tutorialVO : list) {
-			System.out.println(tutorialVO.getName());
-		}
+//		List<TutorialVO> list = gson.fromJson(json, new TypeToken<List<TutorialVO>>(){}.getType());
+//		for (TutorialVO tutorialVO : list) {
+//			System.out.println(tutorialVO.getName());
+//		}
 
 		return "index";
 	}
 
 	private String getEmployees()
 	{
-	    final String uri = "http://localhost:9000/tutorials";
+	    final String uri = "http://env-7146295.jelasticlw.com.br/controllerservices/tutorials";
 
 //	    RestTemplate restTemplate = new RestTemplate();
 //	    String result = restTemplate.getForObject(uri, String.class);

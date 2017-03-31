@@ -68,7 +68,7 @@
 			<div style="width: 50%" class="row">
 				<div class="col-lg-6">
 
-					<form action="/bootstrapteste/login" method="POST">
+					<form action="/login" method="POST">
 
 						<div class="form-group">
 							<label>Usuario</label> <input id="user" name="user" class="form-control">

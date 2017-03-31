@@ -18,8 +18,8 @@ import br.com.bootstrapteste.service.UserService;
 
 @Controller
 public class LoginController {
-	
-	
+
+
 	@Autowired
 	private UserService userService;
 
@@ -27,63 +27,63 @@ public class LoginController {
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
-		
+
 		SecurityContext sec = (SecurityContext) SecurityContextHolder.getContext();
-		
+
 //		UserVO user = null;
 //		if(sec != null){
 //			Authentication auth = (Authentication) SecurityContextHolder.getContext().getAuthentication();
-//			
+//
 //			if(auth != null && auth.getPrincipal() instanceof UserDetails){
 //				user = ((UserVO) auth.getPrincipal());
 //			}
-//			
+//
 //		}
-		
+
 		return modelAndView;
 	}
-	
-	
-	@RequestMapping(value="/registration", method = RequestMethod.GET)
-	public ModelAndView registration(){
-		ModelAndView modelAndView = new ModelAndView();
-		UserVO user = new UserVO();
-		modelAndView.addObject("user", user);
-		modelAndView.setViewName("registration");
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid UserVO user, BindingResult bindingResult) {
-		ModelAndView modelAndView = new ModelAndView();
-		UserVO userExists = userService.findUserByEmail(user.getName());
-		if (userExists != null) {
-			bindingResult
-					.rejectValue("email", "error.user",
-							"There is already a user registered with the email provided");
-		}
-		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("registration");
-		} else {
+
+
+//	@RequestMapping(value="/registration", method = RequestMethod.GET)
+//	public ModelAndView registration(){
+//		ModelAndView modelAndView = new ModelAndView();
+//		UserVO user = new UserVO();
+//		modelAndView.addObject("user", user);
+//		modelAndView.setViewName("registration");
+//		return modelAndView;
+//	}
+
+//	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+//	public ModelAndView createNewUser(@Valid UserVO user, BindingResult bindingResult) {
+//		ModelAndView modelAndView = new ModelAndView();
+//		UserVO userExists = userService.findUserByEmail(user.getName());
+//		if (userExists != null) {
+//			bindingResult
+//					.rejectValue("email", "error.user",
+//							"There is already a user registered with the email provided");
+//		}
+//		if (bindingResult.hasErrors()) {
+//			modelAndView.setViewName("registration");
+//		} else {
 //			userService.saveUser(user);
-			modelAndView.addObject("successMessage", "User has been registered successfully");
-			modelAndView.addObject("user", new UserVO());
-			modelAndView.setViewName("registration");
-			
-		}
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
-	public ModelAndView home(){
-		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserVO user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getName());
-		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("admin/home");
-		return modelAndView;
-	}
+//			modelAndView.addObject("successMessage", "User has been registered successfully");
+//			modelAndView.addObject("user", new UserVO());
+//			modelAndView.setViewName("registration");
+//
+//		}
+//		return modelAndView;
+//	}
+
+//	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
+//	public ModelAndView home(){
+//		ModelAndView modelAndView = new ModelAndView();
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		UserVO user = userService.findUserByEmail(auth.getName());
+//		modelAndView.addObject("userName", "Welcome " + user.getName());
+//		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+//		modelAndView.setViewName("admin/home");
+//		return modelAndView;
+//	}
 
 //	@RequestMapping("/login")
 //	public String index(){
@@ -115,7 +115,7 @@ public class LoginController {
 
 //	@RequestMapping(value="/login/loginAccount", method = RequestMethod.GET)
 //	public String login(Model model){
-//		
+//
 //		ModelAndView modelAndView = new ModelAndView();
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //
