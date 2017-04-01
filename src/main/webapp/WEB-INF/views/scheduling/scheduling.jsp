@@ -33,12 +33,12 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">
-						Seja Bem Vindo
+						Agenda
 					</h1>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-dashboard"></i> <a href="index.html">Dashboard</a>
+						<li><i class="fa fa-dashboard"></i> <a href="index">Página Inicial</a>
 						</li>
-						<li class="active"><i class="fa fa-file"></i> Blank Page</li>
+						<li class="active"><i class="fa fa-file"></i> Agenda</li>
 					</ol>
 
 				</div>
@@ -51,14 +51,11 @@
 					<form role="form">
 
 						<div class="form-group">
-							<label>Text Input</label> <input class="form-control">
-							<p class="help-block">Example block-level help text here.</p>
+							<p class="help-block">Essa tela preciso ver com vcs como vou desenvolver ... a principio acho que a tela de buscar agendamentos já atende o que vcs precisam mas podemos ver 
+							como funciona o componente de calendário para visualizar a agenda.
+							</p>
 						</div>
 
-						<div class="form-group">
-							<label>Text Input with Placeholder</label> <input
-								class="form-control" placeholder="Enter text">
-						</div>
 					</form>
 				</div>
 			</div>

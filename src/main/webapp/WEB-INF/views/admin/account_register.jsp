@@ -51,7 +51,7 @@
 					<form role="form">
 
 						<div class="form-group">
-							<label>Tela onde ficará as configurações de usuários</label> <input class="form-control">
+							<label>Tela onde ficará as configurações de usuários, será acessada somente pelos administradores do sistema.</label> <input class="form-control">
 						</div>
 
 					</form>

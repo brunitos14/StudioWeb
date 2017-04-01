@@ -52,29 +52,29 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="/"><i class="fa fa-fw fa-dashboard"></i> Página Principal</a>
+                        <a href="/studiocontroller/"><i class="fa fa-fw fa-dashboard"></i> Página Principal</a>
                     </li>
                     <li>
-                        <a href="/account_register"><i class="fa fa-fw fa-edit"></i> Usuários</a>
+                        <a href="/studiocontroller/account_register"><i class="fa fa-fw fa-edit"></i> Usuários</a>
                     </li>
 
                      <li>
-                        <a href="/studio_register"><i class="fa fa-fw fa-edit"></i> Estúdios</a>
+                        <a href="/studiocontroller/studio_register"><i class="fa fa-fw fa-edit"></i> Estúdios</a>
                    	</li>
 
                    	<li>
-                        <a href="/budget"><i class="fa fa-fw fa-wrench"></i>Orçamentos</a>
+                        <a href="/studiocontroller/search_scheduling"><i class="fa fa-fw fa-wrench"></i>Agendamentos</a>
                    	</li>
 
 					<li>
-                        <a href="/scheduling"><i class="fa fa-fw fa-table"></i> Agenda</a>
+                        <a href="/studiocontroller/scheduling"><i class="fa fa-fw fa-table"></i>Agenda</a>
                    	</li>
 
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-bar-chart-o"></i> Relatórios <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="/reports">Visão geral</a>
+                                <a href="/studiocontroller/reports">Visão geral</a>
                             </li>
                         </ul>
                     </li>

@@ -1,8 +1,5 @@
 package br.com.bootstrapteste.VOs;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.security.core.GrantedAuthority;
 
 public class RuleVO implements GrantedAuthority{

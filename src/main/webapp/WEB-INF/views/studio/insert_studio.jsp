@@ -49,7 +49,7 @@
 			<div class="row">
 				<div class="col-lg-6">
 
-					<form action="/confirm_include" method="POST" role="form">
+					<form action="/studiocontroller/confirm_include" method="POST" role="form">
 
 						<div class="form-group">
 							<label>Nome do Estúdio</label> 
@@ -71,8 +71,8 @@
 							<input class="form-control">
 						</div>
 						
-						<div class="form-group">
-							<button type="submit" class="btn btn-default" >Incluir</button>
+						<div style="text-align: right" class="form-group">
+							<button type="submit" class="btn btn-default" >Salvar</button>
 						</div>
 						
 					</form>

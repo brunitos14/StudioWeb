@@ -47,6 +47,7 @@
 
 			<div class="row">
 <!-- 				<div class="col-lg-6"> -->
+<h1>Futuramente pensei em colocar os agendamentos do dia e algumas informações do estúdio, mas o minimo possível para não deixar a página inicial pesada</h1>
 
 <!-- 					<form role="form"> -->
 

@@ -20,7 +20,7 @@
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 
-<title>Editar Estúdio</title>
+<title>Editar Agendamento</title>
 </head>
 <body>
 
@@ -33,13 +33,13 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">
-						Editar Estúdio
+						Editar Agendamento
 					</h1>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-dashboard"></i> <a href="/index">Página Principal</a>
 						</li>
-						<li class="active"><i class="fa fa-file"></i> Estúdios</li>
-						<li class="active"><i class="fa fa-file"></i> Editar Estúdio</li>
+						<li class="active"><i class="fa fa-file"></i> Agendamento</li>
+						<li class="active"><i class="fa fa-file"></i> Editar Agendamento</li>
 					</ol>
 
 				</div>
@@ -49,20 +49,10 @@
 			<div class="row">
 				<div class="col-lg-6">
 
-					<form action="/studiocontroller/confirm_include" method="POST" role="form">
+					<form action="/studiocontroller/confirm_scheduling" method="POST" role="form">
 
 						<div class="form-group">
-							<label>Nome do Estúdio</label> 
-							<input class="form-control">
-						</div>
-						
-						<div class="form-group">
-							<label>Endereço</label> 
-							<input class="form-control">
-						</div>
-						
-						<div class="form-group">
-							<label>E-Mail</label> 
+							<label>Nome do Cliente</label> 
 							<input class="form-control">
 						</div>
 						
@@ -72,6 +62,23 @@
 						</div>
 						
 						<div class="form-group">
+							<label>E-Mail</label> 
+							<input class="form-control">
+						</div>
+
+						<div class="form-group">
+            				<div class='input-group date'>
+							<label>Data</label> <input type="date" class="form-control">
+							</div>
+						</div>
+						
+						<div class="form-group">
+            				<div class='input-group time'>
+							<label>Hora</label> <input type="time" class="form-control">
+							</div>
+						</div>	
+						
+						<div style="text-align: right" class="form-group">
 							<button type="submit" class="btn btn-default" >Salvar</button>
 						</div>
 						

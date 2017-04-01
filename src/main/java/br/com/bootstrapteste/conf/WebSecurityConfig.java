@@ -16,9 +16,6 @@ import br.com.bootstrapteste.service.UserService;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private UserDetailsService userDetailsService;
-
 	@Override
 	@Bean
 	public UserDetailsService userDetailsService(){
@@ -87,11 +84,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	       .ignoring()
 	       .antMatchers("/css/**", "/font-awesome/**", "/fonts/**", "/js/**", "/images/**");
 	}
-
-//	@Bean
-//	public BCryptPasswordEncoder passwordEncoder() {
-//		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//		return bCryptPasswordEncoder;
-//	}
 
 }

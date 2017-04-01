@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,7 +22,7 @@
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 
-<title>Orçamentos</title>
+<title>Agendamentos</title>
 </head>
 <body>
 
@@ -33,11 +34,11 @@
 			<!-- Page Heading -->
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Orçamentos</h1>
+					<h1 class="page-header">Agendamentos</h1>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-dashboard"></i> <a href="/index">Página
 								Principal</a></li>
-						<li class="active"><i class="fa fa-file"></i> Orçamentos</li>
+						<li class="active"><i class="fa fa-file"></i>Agendamentos</li>
 					</ol>
 
 				</div>
@@ -47,7 +48,7 @@
 			<div class="row">
 				<div class="col-lg-6">
 
-					<form action="/search_budget" method="GET" role="form">
+					<form action="/studiocontroller/search_scheduling_edit" method="GET" role="form">
 
 						<div class="form-group">
 							<label>Nome do Cliente</label> <input class="form-control">
@@ -69,9 +70,9 @@
 							</div>
 						</div>
 						<div style="text-align: right" class="form-group">
-							<a href="/insert_budget" class="btn btn-default">Incluir Orçamento</a>
+							<a href="/studiocontroller/insert_scheduling" class="btn btn-default">Incluir Agendamento</a>
 
-							<button type="submit" class="btn btn-default">Buscar</button>
+							<button type="submit" class="btn btn-default">Buscar Agendamentos</button>
 						</div>
 
 					</form>
@@ -82,31 +83,34 @@
 		</div>
 
 
-		<c:if test="${ studioList != null }">
+		<c:if test="${ schedulingList != null }">
 		<div align="center" class="row">
-			<form action="/edit_studio">
+			<form action="/studiocontroller/edit_scheduling">
 				<div class="col-lg-8">
-					<h2>Lista de Estúdios</h2>
+					<h2>Lista de Agendamentos</h2>
 					<div class="table-responsive">
 						<table class="table table-bordered table-hover table-striped">
 							<thead>
 								<tr>
-									<th>Nome do Estúdio</th>
-									<th>Endereço</th>
+									<th>Nome do Cliente</th>
 									<th>Telefone</th>
 									<th>Email</th>
+									<th>Data do Agendamento</th>
+									<th>Hora do Agendamento</th>
 									<th></th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${studioList}" var="studio">
+								<c:forEach items="${schedulingList}" var="scheduling">
 									<tr class="active">
-										<td>${ studio.name }</td>
-										<td>${ studio.end }</td>
-										<td>${ studio.tel }</td>
-										<td>${ studio.email }</td>
-										<td><p onclick="/edit_studio" align="center" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+										<td>${ scheduling.name }</td>
+										<td>${ scheduling.tel }</td>
+										<td>${ scheduling.email }</td>
+										<td><fmt:formatDate pattern="dd/MM/yyyy" value="${ scheduling.dateScheduling}" />
+										<td><fmt:formatDate pattern="HH:mm:ss" value="${ scheduling.hourScheduling}" />
+										
+										<td><p onclick="/studiocontroller/edit_scheduling" align="center" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
    										<td><p align="center" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
 										
 									</tr>
