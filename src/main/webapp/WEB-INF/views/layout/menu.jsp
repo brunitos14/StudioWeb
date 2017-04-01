@@ -55,11 +55,11 @@
                         <a href="/"><i class="fa fa-fw fa-dashboard"></i> Página Principal</a>
                     </li>
                     <li>
-                        <a href="/account_register"><i class="fa fa-fw fa-edit"></i> Cadastro de Usuários</a>
+                        <a href="/account_register"><i class="fa fa-fw fa-edit"></i> Usuários</a>
                     </li>
 
                      <li>
-                        <a href="/studio_register"><i class="fa fa-fw fa-edit"></i> Cadastro de Estudio</a>
+                        <a href="/studio_register"><i class="fa fa-fw fa-edit"></i> Estúdios</a>
                    	</li>
 
                    	<li>

@@ -36,9 +36,9 @@
 						Seja Bem Vindo
 					</h1>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-dashboard"></i> <a href="index.html">Dashboard</a>
+						<li><i class="fa fa-dashboard"></i> <a href="index.html">Página Principal</a>
 						</li>
-						<li class="active"><i class="fa fa-file"></i> Blank Page</li>
+<!-- 						<li class="active"><i class="fa fa-file"></i> Blank Page</li> -->
 					</ol>
 
 				</div>
@@ -46,21 +46,44 @@
 
 
 			<div class="row">
-				<div class="col-lg-6">
+<!-- 				<div class="col-lg-6"> -->
 
-					<form role="form">
+<!-- 					<form role="form"> -->
 
-						<div class="form-group">
-							<label>Text Input</label> <input class="form-control">
-							<p class="help-block">Example block-level help text here.</p>
-						</div>
+<!-- 						<div class="form-group"> -->
+<!-- 							<label>Text Input</label> <input class="form-control"> -->
+<!-- 							<p class="help-block">Example block-level help text here.</p> -->
+<!-- 						</div> -->
 
-						<div class="form-group">
-							<label>Text Input with Placeholder</label> <input
-								class="form-control" placeholder="Enter text">
-						</div>
-					</form>
-				</div>
+<!-- 						<div class="form-group"> -->
+<!-- 							<label>Text Input with Placeholder</label> <input -->
+<!-- 								class="form-control" placeholder="Enter text"> -->
+<!-- 						</div> -->
+<!-- 					</form> -->
+<!-- 				</div> -->
+
+
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
 			</div>
 
 
