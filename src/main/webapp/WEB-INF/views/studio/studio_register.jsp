@@ -47,7 +47,7 @@
 			<div class="row">
 				<div class="col-lg-6">
 
-					<form action="/studiocontroller/search_studio" method="GET" role="form">
+					<form action="${pageContext.request.contextPath}/search_studio" method="GET" role="form">
 
 						<div class="form-group">
 							<label>Nome do Estúdio</label> <input class="form-control">
@@ -56,7 +56,7 @@
 
 
 						<div style="text-align: right" class="form-group">
-							<a href="/studiocontroller/insert_studio" class="btn btn-default">Incluir Estúdio</a>
+							<a href="${pageContext.request.contextPath}/insert_studio" class="btn btn-default">Incluir Estúdio</a>
 
 							<button type="submit" class="btn btn-default">Buscar</button>
 						</div>
@@ -71,7 +71,7 @@
 
 		<c:if test="${ studioList != null }">
 		<div align="center" class="row">
-			<form action="/studiocontroller/edit_studio">
+			<form action="${pageContext.request.contextPath}/edit_studio">
 				<div class="col-lg-8">
 					<h2>Lista de Estúdios</h2>
 					<div class="table-responsive">
@@ -93,9 +93,9 @@
 										<td>${ studio.end }</td>
 										<td>${ studio.tel }</td>
 										<td>${ studio.email }</td>
-										<td><p onclick="/studiocontroller/edit_studio" align="center" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+										<td><p onclick="${pageContext.request.contextPath}/edit_studio" align="center" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
    										<td><p align="center" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-										
+
 									</tr>
 								</c:forEach>
 							</tbody>

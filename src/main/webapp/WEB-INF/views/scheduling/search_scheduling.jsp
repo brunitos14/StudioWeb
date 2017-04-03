@@ -48,29 +48,29 @@
 			<div class="row">
 				<div class="col-lg-6">
 
-					<form action="/studiocontroller/search_scheduling_edit" method="GET" role="form">
+					<form action="${pageContext.request.contextPath}/search_scheduling_edit" method="GET" role="form">
 
 						<div class="form-group">
 							<label>Nome do Cliente</label> <input class="form-control">
 						</div>
-						
+
 						<div class="form-group">
 							<label>Telefone</label> <input class="form-control">
 						</div>
 
 						<div class="form-group">
-            				<div class='input-group date'>						
+            				<div class='input-group date'>
 							<label>De:</label> <input type="date" class="form-control">
 						</div>
 						</div>
-							
+
 						<div class="form-group">
             				<div class='input-group date'>
 							<label>Até:</label> <input type="date" class="form-control">
 							</div>
 						</div>
 						<div style="text-align: right" class="form-group">
-							<a href="/studiocontroller/insert_scheduling" class="btn btn-default">Incluir Agendamento</a>
+							<a href="${pageContext.request.contextPath}/insert_scheduling" class="btn btn-default">Incluir Agendamento</a>
 
 							<button type="submit" class="btn btn-default">Buscar Agendamentos</button>
 						</div>
@@ -85,7 +85,7 @@
 
 		<c:if test="${ schedulingList != null }">
 		<div align="center" class="row">
-			<form action="/studiocontroller/edit_scheduling">
+			<form action="${pageContext.request.contextPath}/edit_scheduling">
 				<div class="col-lg-8">
 					<h2>Lista de Agendamentos</h2>
 					<div class="table-responsive">
@@ -109,10 +109,10 @@
 										<td>${ scheduling.email }</td>
 										<td><fmt:formatDate pattern="dd/MM/yyyy" value="${ scheduling.dateScheduling}" />
 										<td><fmt:formatDate pattern="HH:mm:ss" value="${ scheduling.hourScheduling}" />
-										
-										<td><p onclick="/studiocontroller/edit_scheduling" align="center" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+
+										<td><p onclick="${pageContext.request.contextPath}/edit_scheduling" align="center" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
    										<td><p align="center" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-										
+
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -49,32 +49,32 @@
 			<div class="row">
 				<div class="col-lg-6">
 
-					<form action="/studiocontroller/confirm_include" method="POST" role="form">
+					<form action="${pageContext.request.contextPath}/confirm_include" method="POST" role="form">
 
 						<div class="form-group">
-							<label>Nome do Estúdio</label> 
+							<label>Nome do Estúdio</label>
 							<input class="form-control">
 						</div>
-						
+
 						<div class="form-group">
-							<label>Endereço</label> 
+							<label>Endereço</label>
 							<input class="form-control">
 						</div>
-						
+
 						<div class="form-group">
-							<label>E-Mail</label> 
+							<label>E-Mail</label>
 							<input class="form-control">
 						</div>
-						
+
 						<div class="form-group">
-							<label>Telefone</label> 
+							<label>Telefone</label>
 							<input class="form-control">
 						</div>
-						
+
 						<div style="text-align: right" class="form-group">
 							<button type="submit" class="btn btn-default" >Salvar</button>
 						</div>
-						
+
 					</form>
 				</div>
 			</div>

@@ -50,18 +50,18 @@
 			<div class="row">
 				<div class="col-lg-6">
 
-					<form action="/studiocontroller/search_reports" method="GET" role="form">
+					<form action="${pageContext.request.contextPath}/search_reports" method="GET" role="form">
 
 						<div class="form-group">
-						
+
 						<p class="help-block"> As telas de relatório além de listar o relatorio que vcs definirem também exportara os dados para excel e ou pdf.
 							</p>
-							
-            				<div class='input-group date'>						
+
+            				<div class='input-group date'>
 							<label>De:</label> <input type="date" class="form-control">
 						</div>
 						</div>
-							
+
 						<div class="form-group">
             				<div class='input-group date'>
 							<label>Até:</label> <input type="date" class="form-control">
@@ -105,25 +105,25 @@
 										<td><fmt:formatDate pattern="HH:mm:ss" value="${ scheduling.hourScheduling}" />
 									</tr>
 								</c:forEach>
-							
+
 							</tbody>
 						</table>
-					
+
 						<div style="text-align: right">
 							<button  type="submit" class="btn btn-default">Exportar Excel</button>
-						</div>						
-						
+						</div>
+
 					</div>
-					
-					
-					
+
+
+
 				</div>
 			</form>
-			
+
 			</div>
-			
+
 		</div>
-		
+
 		</c:if>
 
 	<!-- /.row -->
