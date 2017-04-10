@@ -75,7 +75,7 @@
 						</div>
 
 						<div class="form-group">
-							<label>Senha</label> <input id="password" name="password" class="form-control">
+							<label>Senha</label> <input type="password" id="password" name="password" class="form-control">
 							<a href="index">Esqueci minha senha</a>
 						</div>
 						<c:choose>

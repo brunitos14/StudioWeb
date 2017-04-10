@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,9 @@ import br.com.bootstrapteste.VOs.UserVO;
 
 @Service
 public class UserService implements UserDetailsService {
+	
+	@Value("${controllerservices}")
+    private String rest;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -50,7 +54,7 @@ public class UserService implements UserDetailsService {
 
 	 private String getUser(String email)
 		{
-		    final String uri = "http://env-7146295.jelasticlw.com.br/controllerservices/account";
+		    final String uri = rest + "account/";
 
 		    RestTemplate restTemplate = new RestTemplate();
 		    HttpHeaders headers = new HttpHeaders();
