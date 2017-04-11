@@ -71,7 +71,7 @@
 					<form action="${pageContext.request.contextPath}/login" method="POST">
 
 						<div class="form-group">
-							<label>Usuario</label> <input id="user" name="user" class="form-control">
+							<label>Usuario</label> <input id="username" name="username" class="form-control">
 						</div>
 
 						<div class="form-group">
@@ -87,7 +87,7 @@
 						</c:choose>
 
 						<div class="form-group">
-							<button type="submit" class="btn btn-default">Entrar</button>
+							<button name="submit" type="submit" class="btn btn-default">Entrar</button>
 						</div>
 
 					</form>
