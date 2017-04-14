@@ -28,7 +28,7 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 
-		SecurityContext sec = (SecurityContext) SecurityContextHolder.getContext();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 //		UserVO user = null;
 //		if(sec != null){

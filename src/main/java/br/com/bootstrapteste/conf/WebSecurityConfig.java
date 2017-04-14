@@ -42,39 +42,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/css/**").permitAll();
-//		http.authorizeRequests().antMatchers("/font-awesome/**").permitAll();
-//		http.authorizeRequests().antMatchers("/fonts/**").permitAll();
-//		http.authorizeRequests().antMatchers("/js/**").permitAll();
-
-//		http.
-//		authorizeRequests()
-//			.antMatchers("/").permitAll()
-//			.antMatchers("/login").permitAll()
-//			.antMatchers("/registration").permitAll()
-//			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-//			.authenticated().and().csrf().disable().formLogin()
-//			.loginPage("/login").failureUrl("/login?error=true")
-//			.defaultSuccessUrl("/admin/home")
-//			.usernameParameter("user")
-//			.passwordParameter("password")
-//			.and().logout()
-//			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//			.logoutSuccessUrl("/").and().exceptionHandling()
-//			.accessDeniedPage("/access-denied");
 
 		http.
 		authorizeRequests()
-		.antMatchers("/admin/**").hasAuthority("ADMIN_GROUP").anyRequest();
+		.antMatchers("/admin/**").hasAuthority("USER_GROUP").anyRequest();
 
 		http.csrf().disable().authorizeRequests().anyRequest().authenticated().and()
 		.formLogin().loginPage("/login").defaultSuccessUrl("/")
 		.failureUrl("/login?error")
 		.permitAll();
-
-
-
-
 
 	}
 

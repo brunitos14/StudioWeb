@@ -13,7 +13,7 @@ import org.springframework.util.StringUtils;
 public class UserVO implements UserDetails {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -8079001840826672953L;
 
@@ -22,7 +22,8 @@ public class UserVO implements UserDetails {
 	private String name;
 	private String password;
 	private int status;
-	private Set<RuleVO> rules;
+
+	private Set<RuleVO> listRules;
 
 	public String getName() {
 		return name;
@@ -64,7 +65,7 @@ public class UserVO implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> auto = new ArrayList<GrantedAuthority>();
-		auto.addAll(getRules());
+		auto.addAll(getListRules());
 		return auto;
 	}
 
@@ -97,12 +98,12 @@ public class UserVO implements UserDetails {
 		return true;
 	}
 
-	public Set<RuleVO> getRules() {
-		return rules;
+	public Set<RuleVO> getListRules() {
+		return listRules;
 	}
 
-	public void setRules(Set<RuleVO> rules) {
-		this.rules = rules;
+	public void setListRules(Set<RuleVO> listRules) {
+		this.listRules = listRules;
 	}
 
 }
