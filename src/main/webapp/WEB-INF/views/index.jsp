@@ -97,5 +97,7 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
+
+	<script src="js/authenticate/auth.js"></script>
 </body>
 </html>

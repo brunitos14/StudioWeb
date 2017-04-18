@@ -1,16 +1,19 @@
 package br.com.bootstrapteste.controllers;
 
+import java.awt.Desktop;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
+import com.google.api.client.auth.oauth2.AuthorizationRequestUrl;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -24,9 +27,8 @@ import com.google.api.client.util.DateTime;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
-
-import br.com.bootstrapteste.Quickstart;
 
 @Controller
 public class ConvidadoController {
@@ -53,7 +55,7 @@ public class ConvidadoController {
 	 * If modifying these scopes, delete your previously saved credentials at
 	 * ~/.credentials/calendar-java-quickstart
 	 */
-	private static final List<String> SCOPES = Arrays.asList(CalendarScopes.CALENDAR_READONLY);
+	private static final List<String> SCOPES = Arrays.asList(CalendarScopes.CALENDAR);
 
 	static {
 		try {
@@ -73,13 +75,18 @@ public class ConvidadoController {
 	 */
 	public static Credential authorize() throws IOException {
 		// Load client secrets.
-		InputStream in = Quickstart.class.getResourceAsStream("/client_secret.json");
+		InputStream in = ConvidadoController.class.getResourceAsStream("/client_secret.json");
 		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
 		// Build flow and trigger user authorization request.
 		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY,
 				clientSecrets, SCOPES).setDataStoreFactory(DATA_STORE_FACTORY).setAccessType("offline").build();
-		Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+//		Credential credential = new Credential(null);// = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+
+		 AuthorizationCodeInstalledApp auth = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver());
+
+		 Credential credential = auth.authorize("user");
+
 		System.out.println("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
 		return credential;
 	}
@@ -100,39 +107,53 @@ public class ConvidadoController {
 //	private ConvidadoRepository repository;
 
 	@RequestMapping("/")
-	public String index(){
+	public String login(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("index");
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//
+//		auth.getAuthorities();
 
-		auth.getAuthorities();
+//		try {
 
-		try {
-
-		com.google.api.services.calendar.Calendar service = getCalendarService();
-
+//		com.google.api.services.calendar.Calendar service = getCalendarService();
 
 		// List the next 10 events from the primary calendar.
-		DateTime now = new DateTime(System.currentTimeMillis());
-		Events events = service.events().list("primary").setMaxResults(10).setTimeMin(now).setOrderBy("startTime")
-				.setSingleEvents(true).execute();
-		List<Event> items = events.getItems();
-		if (items.size() == 0) {
-			System.out.println("No upcoming events found.");
-		} else {
-			System.out.println("Upcoming events");
-			for (Event event : items) {
-				DateTime start = event.getStart().getDateTime();
-				if (start == null) {
-					start = event.getStart().getDate();
-				}
-				System.out.printf("%s (%s)\n", event.getSummary(), start);
-			}
-		}
+//		DateTime now = new DateTime(System.currentTimeMillis());
+//
+//		Event event = new Event();
+//		event.setDescription("Teste da porra toda");
+//		EventDateTime eventDateTime = new EventDateTime();
+//		eventDateTime.setDate(now);
+//		event.setStart(eventDateTime);
+//
+//		EventDateTime eventDateTime2 = new EventDateTime();
+//		eventDateTime2.setDate(now);
+//		event.setEnd(eventDateTime2);
+//
+//		service.events().insert("Novo evento", event).execute();
+//
+//		Events events = service.events().list("primary").setMaxResults(10).setTimeMin(now).setOrderBy("startTime")
+//				.setSingleEvents(true).execute();
+//		List<Event> items = events.getItems();
+//		if (items.size() == 0) {
+//			System.out.println("No upcoming events found.");
+//		} else {
+//			System.out.println("Upcoming events");
+//			for (Event event1 : items) {
+//				DateTime start = event1.getStart().getDateTime();
+//				if (start == null) {
+//					start = event1.getStart().getDate();
+//				}
+//				System.out.printf("%s (%s)\n", event1.getSummary(), start);
+//			}
+//		}
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		return "index";
 	}
