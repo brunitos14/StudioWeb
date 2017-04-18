@@ -1,6 +1,5 @@
   var GoogleAuth;
-  var SCOPE = 'https://accounts.google.com/o/oauth2/auth';
-  var NEW_SCOPES = 'https://www.googleapis.com/auth/calendar';
+  var SCOPE = 'https://www.googleapis.com/auth/calendar';
   function handleClientLoad() {
     // Load the API's client and auth2 modules.
     // Call the initClient function after the modules load.
@@ -16,9 +15,9 @@
     // Get API key and client ID from API Console.
     // 'scope' field specifies space-delimited list of access scopes.
     gapi.client.init({
-        'apiKey': '983136618644-pnbf015919qja7s4bp5op3crsjeqmbmf.apps.googleusercontent.com',
-        'discoveryDocs': 'http://localhost:8080',
-        'clientId': 'precise-line-165001',
+        'apiKey': 'tattoocontroller',
+        'discoveryDocs': [discoveryUrl],
+        'clientId': '983136618644-pnbf015919qja7s4bp5op3crsjeqmbmf.apps.googleusercontent.com',
         'scope': SCOPE
     }).then(function () {
       GoogleAuth = gapi.auth2.getAuthInstance();
@@ -28,7 +27,6 @@
 
       // Handle initial sign-in state. (Determine if user is already signed in.)
       var user = GoogleAuth.currentUser.get();
-      GoogleUser.grant({'scope': NEW_SCOPES});
       setSigninStatus();
 
       // Call handleAuthClick function when user clicks on
