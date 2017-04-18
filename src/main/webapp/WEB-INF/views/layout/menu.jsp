@@ -55,7 +55,7 @@
                         <a href="${pageContext.request.contextPath}/"><i class="fa fa-fw fa-dashboard"></i> Página Principal</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/account_register"><i class="fa fa-fw fa-edit"></i> Usuários</a>
+                       	<a href="${pageContext.request.contextPath}/account_register"><i class="fa fa-fw fa-edit"></i> Usuários</a>
                     </li>
 
                      <li>

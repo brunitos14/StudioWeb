@@ -13,11 +13,11 @@ public class AccountController {
 //	private UserService userService;
 
 	@RequestMapping(value={"/account_register"}, method = RequestMethod.GET)
-	public ModelAndView init(){
+	public String init(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/account_register");
 
-		return modelAndView;
+		return "admin/account_register";
 	}
 
 
