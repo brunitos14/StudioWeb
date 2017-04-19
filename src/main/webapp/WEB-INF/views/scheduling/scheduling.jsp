@@ -55,13 +55,7 @@
 								funciona o componente de calendário para visualizar a agenda.</p>
 						</div>
 
-						<button id="sign-in-or-out-button" style="margin-left: 25px">Sign
-							In/Authorize</button>
-						<button id="revoke-access-button"
-							style="display: none; margin-left: 25px">Revoke access</button>
-
-						<div id="auth-status" style="display: inline; padding-left: 25px"></div>
-						<hr>
+						<button onclick="trySampleRequest();">Try sample request</button>
 
 					</form>
 				</div>
@@ -78,96 +72,105 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script async defer src="https://apis.google.com/js/api.js"
-		onload="this.onload=function(){};handleClientLoad()"
-		onreadystatechange="if (this.readyState === 'complete') this.onload()">
-
-	</script>
+<!-- 	<script src="js/authenticate/auth.js"></script> -->
 
 
-	<script>
-		var GoogleAuth;
-		var SCOPE = 'https://www.googleapis.com/auth/calendar';
-		function handleClientLoad() {
-			// Load the API's client and auth2 modules.
-			// Call the initClient function after the modules load.
-			gapi.load('client:auth2', initClient);
-		}
+    <script>
+  var YOUR_CLIENT_ID = '983136618644-scvkov1tlg50kvt76bjelrbjel2t7vk3.apps.googleusercontent.com';
+  var YOUR_REDIRECT_URI = 'http://localhost:8080/studiocontroller/';
+  var queryString = location.hash.substring(1);
 
-		function initClient() {
-			// Retrieve the discovery document for version 3 of Google Drive API.
-			// In practice, your app can retrieve one or more discovery documents.
-			var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
+  // Parse query string to see if page request is coming from OAuth 2.0 server.
+  var params = {};
+  var regex = /([^&=]+)=([^&]*)/g, m;
+  while (m = regex.exec(queryString)) {
+    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+    // Try to exchange the param values for an access token.
+    exchangeOAuth2Token(params);
+  }
 
-			// Initialize the gapi.client object, which app uses to make API requests.
-			// Get API key and client ID from API Console.
-			// 'scope' field specifies space-delimited list of access scopes.
-			gapi.client
-					.init(
-							{
-								'apiKey' : 'AIzaSyCWEHtMBKY5bIdcXT5TF3UuFDUoK-2AAvM',
-								'discoveryDocs' : [ discoveryUrl ],
-								'clientId' : '983136618644-scvkov1tlg50kvt76bjelrbjel2t7vk3.apps.googleusercontent.com',
-								'scope' : SCOPE
-							}).then(function() {
-						GoogleAuth = gapi.auth2.getAuthInstance();
+  // If there's an access token, try an API request.
+  // Otherwise, start OAuth 2.0 flow.
+  function trySampleRequest() {
+    var params = JSON.parse(localStorage.getItem('oauth2-test-params'));
+    if (params && params['access_token']) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET',
+          'https://www.googleapis.com/drive/v3/about?fields=user&' +
+          'access_token=' + params['access_token']);
+      xhr.onreadystatechange = function (e) {
+        console.log(xhr.response);
+      };
+      xhr.send(null);
+    } else {
+      oauth2SignIn();
+    }
+  }
 
-						// Listen for sign-in state changes.
-						GoogleAuth.isSignedIn.listen(updateSigninStatus);
+  /*
+   * Create form to request access token from Google's OAuth 2.0 server.
+   */
+  function oauth2SignIn() {
+    // Google's OAuth 2.0 endpoint for requesting an access token
+    var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
 
-						// Handle initial sign-in state. (Determine if user is already signed in.)
-						var user = GoogleAuth.currentUser.get();
-						setSigninStatus();
+    // Create element to open OAuth 2.0 endpoint in new window.
+    var form = document.createElement('form');
+    form.setAttribute('method', 'GET'); // Send as a GET request.
+    form.setAttribute('action', oauth2Endpoint);
 
-						// Call handleAuthClick function when user clicks on
-						//      "Sign In/Authorize" button.
-						$('#sign-in-or-out-button').click(function() {
-							handleAuthClick();
-						});
-						$('#revoke-access-button').click(function() {
-							revokeAccess();
-						});
-					});
-		}
+    // Parameters to pass to OAuth 2.0 endpoint.
+    var params = {'client_id': YOUR_CLIENT_ID,
+                  'redirect_uri': YOUR_REDIRECT_URI,
+                  'scope': 'https://www.googleapis.com/auth/calendar',
+                  'state': 'try_sample_request',
+                  'include_granted_scopes': 'true',
+                  'response_type': 'token'};
 
-		function handleAuthClick() {
-			if (GoogleAuth.isSignedIn.get()) {
-				// User is authorized and has clicked 'Sign out' button.
-				GoogleAuth.signOut();
-			} else {
-				// User is not signed in. Start Google auth flow.
-				GoogleAuth.signIn();
-			}
-		}
+    // Add form parameters as hidden input values.
+    for (var p in params) {
+      var input = document.createElement('input');
+      input.setAttribute('type', 'hidden');
+      input.setAttribute('name', p);
+      input.setAttribute('value', params[p]);
+      form.appendChild(input);
+    }
 
-		function revokeAccess() {
-			GoogleAuth.disconnect();
-		}
+    // Add form to page and submit it to open the OAuth 2.0 endpoint.
+    document.body.appendChild(form);
+    form.submit();
+  }
 
-		function setSigninStatus(isSignedIn) {
-			var user = GoogleAuth.currentUser.get();
-			var isAuthorized = user.hasGrantedScopes(SCOPE);
-			if (isAuthorized) {
-				$('#sign-in-or-out-button').html('Sign out');
-				$('#revoke-access-button').css('display', 'inline-block');
-				$('#auth-status').html(
-						'You are currently signed in and have granted '
-								+ 'access to this app.');
-			} else {
-				$('#sign-in-or-out-button').html('Sign In/Authorize');
-				$('#revoke-access-button').css('display', 'none');
-				$('#auth-status').html(
-						'You have not authorized this app or you are '
-								+ 'signed out.');
-			}
-		}
-
-		function updateSigninStatus(isSignedIn) {
-			setSigninStatus();
-		}
-	</script>
+  /* Verify the access token received on the query string. */
+  function exchangeOAuth2Token(params) {
+    var oauth2Endpoint = 'https://www.googleapis.com/oauth2/v3/tokeninfo';
+    if (params['access_token']) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', oauth2Endpoint + '?access_token=' + params['access_token']);
+      xhr.onreadystatechange = function (e) {
+        var response = JSON.parse(xhr.response);
+        // When request is finished, verify that the 'aud' property in the
+        // response matches YOUR_CLIENT_ID.
+        if (xhr.readyState == 4 &&
+            xhr.status == 200 &&
+            response['aud'] &&
+            response['aud'] == YOUR_CLIENT_ID) {
+          // Store granted scopes in local storage to facilitate
+          // incremental authorization.
+          params['scope'] = response['scope'];
+          localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
+          if (params['state'] == 'try_sample_request') {
+            trySampleRequest();
+          }
+        } else if (xhr.readyState == 4) {
+          console.log('There was an error processing the token, another ' +
+                      'response was returned, or the token was invalid.')
+        }
+      };
+      xhr.send(null);
+    }
+  }
+</script>
 
 </body>
 </html>
