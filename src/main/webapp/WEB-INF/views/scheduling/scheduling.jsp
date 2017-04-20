@@ -132,7 +132,8 @@
 	function start() {
 	    gapi.load('auth2', function() {
 	      auth2 = gapi.auth2.init({
-	        'clientId' : '983136618644-scvkov1tlg50kvt76bjelrbjel2t7vk3.apps.googleusercontent.com',
+    	  	'apiKey' : 'AIzaSyCWEHtMBKY5bIdcXT5TF3UuFDUoK-2AAvM',
+        	'clientId' : '983136618644-scvkov1tlg50kvt76bjelrbjel2t7vk3.apps.googleusercontent.com',
 			'scope' : 'https://www.googleapis.com/auth/calendar'
 	        // Scopes to request in addition to 'profile' and 'email'
 	        //scope: 'additional_scope'
