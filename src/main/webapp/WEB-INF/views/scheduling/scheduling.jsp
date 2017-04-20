@@ -1,12 +1,13 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<meta name="google-signin-client_id" content="983136618644-scvkov1tlg50kvt76bjelrbjel2t7vk3.apps.googleusercontent.com">
 
 <title>Studio Controller - Bem Vindo</title>
 
@@ -55,7 +56,13 @@
 								funciona o componente de calendário para visualizar a agenda.</p>
 						</div>
 
-						<button onclick="trySampleRequest();">Try sample request</button>
+						<div class="form-group">
+							<button onclick="saveToken()" name="submit" type="submit" class="btn btn-default">Salvar</button>
+						</div>
+
+						<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+						<a href="#" onclick="signOut();">Sign out</a>
 
 					</form>
 				</div>
@@ -72,105 +79,106 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
 
-<!-- 	<script src="js/authenticate/auth.js"></script> -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
+  	<script src="https://apis.google.com/js/client:platform.js?onload=verifyAuth" async defer></script>
 
-    <script>
-  var YOUR_CLIENT_ID = '983136618644-scvkov1tlg50kvt76bjelrbjel2t7vk3.apps.googleusercontent.com';
-  var YOUR_REDIRECT_URI = 'http://localhost:8080/studiocontroller/';
-  var queryString = location.hash.substring(1);
+ <script>
 
-  // Parse query string to see if page request is coming from OAuth 2.0 server.
-  var params = {};
-  var regex = /([^&=]+)=([^&]*)/g, m;
-  while (m = regex.exec(queryString)) {
-    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
-    // Try to exchange the param values for an access token.
-    exchangeOAuth2Token(params);
-  }
+ 	var possuiToken=false;
 
-  // If there's an access token, try an API request.
-  // Otherwise, start OAuth 2.0 flow.
-  function trySampleRequest() {
-    var params = JSON.parse(localStorage.getItem('oauth2-test-params'));
-    if (params && params['access_token']) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET',
-          'https://www.googleapis.com/drive/v3/about?fields=user&' +
-          'access_token=' + params['access_token']);
-      xhr.onreadystatechange = function (e) {
-        console.log(xhr.response);
-      };
-      xhr.send(null);
-    } else {
-      oauth2SignIn();
-    }
-  }
+ 	var id_token;
 
-  /*
-   * Create form to request access token from Google's OAuth 2.0 server.
-   */
-  function oauth2SignIn() {
-    // Google's OAuth 2.0 endpoint for requesting an access token
-    var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+ 	function saveToken(){
 
-    // Create element to open OAuth 2.0 endpoint in new window.
-    var form = document.createElement('form');
-    form.setAttribute('method', 'GET'); // Send as a GET request.
-    form.setAttribute('action', oauth2Endpoint);
+ 		 id_token;
 
-    // Parameters to pass to OAuth 2.0 endpoint.
-    var params = {'client_id': YOUR_CLIENT_ID,
-                  'redirect_uri': YOUR_REDIRECT_URI,
-                  'scope': 'https://www.googleapis.com/auth/calendar',
-                  'state': 'try_sample_request',
-                  'include_granted_scopes': 'true',
-                  'response_type': 'token'};
+ 		  $.ajax({
+ 			  	type: 'POST',
+ 			    url: "http://localhost:8080/studiocontroller/authtoken",
+ 			    async: false,
+ 			    data: {val: id_token},
+ 			    dataType: 'html',
+ 			    success: function (data) {
+ 			        console.log(data);
+ 			    }
+ 			});
+ 	}
 
-    // Add form parameters as hidden input values.
-    for (var p in params) {
-      var input = document.createElement('input');
-      input.setAttribute('type', 'hidden');
-      input.setAttribute('name', p);
-      input.setAttribute('value', params[p]);
-      form.appendChild(input);
-    }
+ 	function signOut() {
+	    var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	      console.log('User signed out.');
+	      auth2.disconnect();
+	    });
+	  }
 
-    // Add form to page and submit it to open the OAuth 2.0 endpoint.
-    document.body.appendChild(form);
-    form.submit();
-  }
+	 function onSignIn(googleUser) {
+	  var profile = googleUser.getBasicProfile();
+	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  console.log('Name: ' + profile.getName());
+	  console.log('Image URL: ' + profile.getImageUrl());
+	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-  /* Verify the access token received on the query string. */
-  function exchangeOAuth2Token(params) {
-    var oauth2Endpoint = 'https://www.googleapis.com/oauth2/v3/tokeninfo';
-    if (params['access_token']) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', oauth2Endpoint + '?access_token=' + params['access_token']);
-      xhr.onreadystatechange = function (e) {
-        var response = JSON.parse(xhr.response);
-        // When request is finished, verify that the 'aud' property in the
-        // response matches YOUR_CLIENT_ID.
-        if (xhr.readyState == 4 &&
-            xhr.status == 200 &&
-            response['aud'] &&
-            response['aud'] == YOUR_CLIENT_ID) {
-          // Store granted scopes in local storage to facilitate
-          // incremental authorization.
-          params['scope'] = response['scope'];
-          localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
-          if (params['state'] == 'try_sample_request') {
-            trySampleRequest();
-          }
-        } else if (xhr.readyState == 4) {
-          console.log('There was an error processing the token, another ' +
-                      'response was returned, or the token was invalid.')
-        }
-      };
-      xhr.send(null);
-    }
-  }
-</script>
+	  id_token = googleUser.getAuthResponse().id_token;
+
+	}
+
+	$('#signinButton').click(function() {
+	    // signInCallback defined in step 6.
+	    auth2.grantOfflineAccess().then(signInCallback);
+	  });
+
+	function start() {
+	    gapi.load('auth2', function() {
+	      auth2 = gapi.auth2.init({
+	        'clientId' : '983136618644-scvkov1tlg50kvt76bjelrbjel2t7vk3.apps.googleusercontent.com',
+			'scope' : 'https://www.googleapis.com/auth/calendar'
+	        // Scopes to request in addition to 'profile' and 'email'
+	        //scope: 'additional_scope'
+	      }).then(function () {
+		      console.log('Sucesso!');
+
+		       possuiToken=true;
+		    });
+	    });
+	  }
+
+	function signInCallback(authResult) {
+		  if (authResult['code']) {
+
+		    // Hide the sign-in button now that the user is authorized, for example:
+		    $('.signinButton').hide();
+
+		    // Send the code to the server
+		    $.ajax({
+		      type: 'POST',
+		      url: 'http://localhost:8080/studiocontroller/storetoken',
+		      // Always include an `X-Requested-With` header in every AJAX request,
+		      // to protect against CSRF attacks.
+		      headers: {
+		        'X-Requested-With': 'XMLHttpRequest'
+		      },
+		      contentType: 'application/octet-stream; charset=utf-8',
+		      success: function(result) {
+		        // Handle or verify the server response.
+		      },
+		      processData: false,
+		      data: authResult['code']
+		    });
+		  } else {
+		    // There was an error.
+		  }
+		}
+
+	function verifyAuth(){
+		if (possuiToken) {
+			start();
+		}
+
+	}
+
+	</script>
 
 </body>
 </html>
